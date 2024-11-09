@@ -92,14 +92,6 @@ const getBookByIdHandler = (request, h) => {
         }
     }
 
-
-    // if (!book) {
-    //     return h.response({
-    //         status: 'fail',
-    //         message: 'Buku tidak ditemukan',
-    //     }).code(404)
-    // }
-
     return h.response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
@@ -110,7 +102,6 @@ const updateBookHandler = (request, h) => {
     const { id } = request.params;
     const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
 
-    // Validasi properti name harus ada
     if (!name) {
         return h.response({
             status: 'fail',
@@ -118,7 +109,6 @@ const updateBookHandler = (request, h) => {
         }).code(400);
     }
 
-    // Validasi readPage tidak boleh lebih besar dari pageCount
     if (readPage > pageCount) {
         return h.response({
             status: 'fail',
@@ -126,11 +116,8 @@ const updateBookHandler = (request, h) => {
         }).code(400);
     }
 
-    // Cari buku berdasarkan ID
     const bookIndex = books.findIndex((book) => book.id === id);
-    console.log('ID:', id, 'Index:', bookIndex);  // Debugging
 
-    // Jika ID tidak ditemukan, kembalikan status 404
     if (bookIndex === -1) {
         return h.response({
             status: 'fail',
@@ -138,7 +125,6 @@ const updateBookHandler = (request, h) => {
         }).code(404);
     }
 
-    // Perbarui data buku
     books[bookIndex] = {
         ...books[bookIndex],
         name,
@@ -152,8 +138,6 @@ const updateBookHandler = (request, h) => {
         finished: readPage === pageCount,
         updatedAt: new Date().toISOString()
     };
-
-    console.log('Updated Book:', books[bookIndex]);  // Debugging
 
     return h.response({
         status: 'success',
