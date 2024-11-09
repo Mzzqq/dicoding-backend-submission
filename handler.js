@@ -72,7 +72,7 @@ const getBookByIdHandler = (request, h) => {
         return h.response({
             status: 'fail',
             message: 'Buku tidak ditemukan',
-        })
+        }).code(404)
     }
 
     return h.response({
