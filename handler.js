@@ -64,4 +64,23 @@ const getAllBooksHandler = (request, h) => {
     }).code(200)
 }
 
-module.exports = { addBookHandler, getAllBooksHandler }
+const getBookByIdHandler = (request, h) => {
+    const { bookId } = request.params
+    const book = books.find((b) => b.id === bookId)
+
+    if (!book) {
+        return h.response({
+            status: 'fail',
+            message: 'Buku tidak ditemukan',
+        })
+    }
+
+    return h.response({
+        status: 'success',
+        data: {
+            book
+        }
+    }).code(200)
+}
+
+module.exports = { addBookHandler, getAllBooksHandler, getBookByIdHandler }
