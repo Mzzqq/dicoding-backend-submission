@@ -1,5 +1,5 @@
 const Hapi = require('@hapi/hapi')
-const { addBookHandler, getAllBooksHandler, getBookByIdHandler, updateBookHandler} = require('./handler')
+const { addBookHandler, getAllBooksHandler, getBookByIdHandler, updateBookHandler, deleteBookHandler} = require('./handler')
 
 const routes = [
     {
@@ -21,6 +21,11 @@ const routes = [
         method: 'PUT',
         path: '/books/{id}',
         handler: updateBookHandler,
+    },
+    {
+        method: 'DELETE',
+        path: '/books/{id}',
+        handler: deleteBookHandler,
     }
 ]
 
